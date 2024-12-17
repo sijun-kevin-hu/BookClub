@@ -2,7 +2,17 @@
 {% block title %}User{% endblock %}
 {% block content %}
 <form action="#" method="POST">
-    <input type="email" name="email" placeholder="Enter Email" value="{{email if email}}" />
-    <input type="submit" value="submit" />
+    <h2>Enter Read Book</h2>
+    <p>Title:</p>
+    <p><input type="text" name="title" /></p>
+    <p>Author:</p>
+    <p><input type="text" name="author" /></p>
+    <p><input type="submit" value="Submit" /></p>
 </form>
+<h2>Books Read:</h2>
+{% for value in values.books %}
+    <p>Title: {{value.title}}</p>
+    <p>Author: {{value.authorName}}</p>
+    <br>
+{% endfor %}
 {% endblock %}

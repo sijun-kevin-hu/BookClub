@@ -23,9 +23,10 @@ class Book(db.Model):
     authorName = db.Column(db.String(80))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
-    def __init__(self, bookName, authorName):
-        self.bookName = bookName
+    def __init__(self, title, authorName, user_id):
+        self.title = title
         self.authorName = authorName
+        self.user_id = user_id
         
 @app.route("/")
 def home():
@@ -35,20 +36,40 @@ def home():
 def view():
     return render_template("view.html", values=User.query.all())
 
+@app.route("/register", methods=["POST", "GET"])
+def register():
+    if request.method == "POST":
+        email = request.form["email"]
+        name = request.form["name"]
+        
+        found_user = User.query.filter_by(email=email).first()
+        if found_user:
+            print("Email exists.")
+            return render_template("login.html")
+        else:
+            session["email"] = email
+            session["user"] = name
+            usr = User(name, email)
+            db.session.add(usr)
+            db.session.commit()
+            print("Saved User")
+            return render_template("login.html")
+    else:
+        return render_template("register.html")
+    
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        user = request.form["name"]
-        session["user"] = user
+        email = request.form["email"]
         
-        found_user = User.query.filter_by(username=user).first()
+        found_user = User.query.filter_by(email=email).first()
         if found_user:
-            session["email"] = found_user.email            
+            session["email"] = found_user.email
+            session["user"] = found_user.username    
+            return redirect(url_for("user"))     
         else:
-            usr = User(user, "")
-            db.session.add(usr)
-            db.session.commit()
-        return redirect(url_for("user"))
+            print("No email")
+            return render_template("login.html")
     else:
         if "user" in session:
             return redirect(url_for("user"))
@@ -56,23 +77,23 @@ def login():
     
 @app.route("/user", methods=["POST", "GET"])
 def user():
-    email = None
     if "user" in session:
-        user = session["user"]
-        
-        if request.method == "POST":
-            email = request.form["email"]
-            session["email"] = email
-            found_user = User.query.filter_by(username=user).first()
-            found_user.email = email
-            db.session.commit()
-            return render_template("user.html", email=email)
+        sessionUser = session["user"]
+        user = User.query.filter_by(username=sessionUser).first()
+        if request.method == "GET":
+            return render_template("user.html", values=user)
         else:
-            if "email" in session:
-                email = session["email"]
-        return render_template("user.html", email=email)
+            title = request.form["title"]
+            author = request.form["author"]
+            user_id = user.id
+            book = Book(title=title, authorName=author, user_id=user_id)
+            db.session.add(book)
+            db.session.commit()
+            return render_template("user.html", values=user)
     else:
         return redirect(url_for("login"))
+    
+        
 
 @app.route("/logout")
 def logout():
