@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Register Page{% endblock %}
 {% block content %}
+<a href="/">Back To Home</a>
+<a href="/auth/login">Login</a>
 <form action="#" method="post">
+    <p>Username:</p>
+    <p><input type="text" name="name" placeholder="Username"required /></p>
     <p>Email:</p>
-    <p><input type="email" name="email" required /></p>
-    <p>Name:</p>
-    <p><input type="text" name="name" required /></p>
+    <p><input type="email" name="email" placeholder="Email" required /></p>
+    <p>Password:</p>
+    <p><input type="password" name="password" placeholder="Password" required /></p>
     <p><input type="submit" value="Submit" /></p>
 </form>
 {% endblock %}

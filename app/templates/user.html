@@ -1,18 +1,15 @@
 {% extends "base.html" %}
 {% block title %}User{% endblock %}
 {% block content %}
-<form action="#" method="POST">
-    <h2>Enter Read Book</h2>
-    <p>Title:</p>
-    <p><input type="text" name="title" required/></p>
-    <p>Author:</p>
-    <p><input type="text" name="author" /></p>
-    <p><input type="submit" value="Submit" /></p>
-</form>
+<a href="/auth/logout">Logout</a>
+<a href="/book/add" >Add Book</a>
 <h2>Books Read:</h2>
 {% for value in values.books %}
     <p>Title: {{value.title}}</p>
-    <p>Author: {{value.authorName}}</p>
+    <p>Author: {{value.author}}</p>
+    <form action="/book/delete/{{ value.id }}" method="post">
+        <button type="submit">Delete</button>
+    </form>
     <br>
 {% endfor %}
-{% endblock %}
+{% endblock %} 
