@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
 from ..models import Book, User, db
 
-bp = Blueprint('book', __name__, url_prefix="/book")
+bp = Blueprint('book', __name__, url_prefix="/api/book")
 
 @bp.route("/add", methods=["GET", "POST"])
 @login_required
@@ -24,3 +24,10 @@ def delete_book(book_id):
     db.session.delete(book)
     db.session.commit()
     return redirect(url_for("user.user"))
+
+@bp.route("/", methods=["GET"])
+@login_required
+def get_books():
+    books = Book.query.filter_by(user_id=current_user.id).all()
+    books_list = [{"title": book.title, "author": book.author} for book in books]
+    return jsonify(books_list)

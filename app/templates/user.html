@@ -2,12 +2,12 @@
 {% block title %}User{% endblock %}
 {% block content %}
 <a href="/auth/logout">Logout</a>
-<a href="/book/add" >Add Book</a>
+<a href="/api/book/add" >Add Book</a>
 <h2>Books Read:</h2>
 {% for value in values.books %}
     <p>Title: {{value.title}}</p>
     <p>Author: {{value.author}}</p>
-    <form action="/book/delete/{{ value.id }}" method="post">
+    <form action="/api/book/delete/{{ value.id }}" method="post">
         <button type="submit">Delete</button>
     </form>
     <br>
