@@ -4,11 +4,7 @@ from ..models import User, Book, db
 
 bp = Blueprint('user', __name__)
 
-@bp.route("/")
-def home():
-    return render_template("index.html")
-  
-@bp.route("/user", methods=["POST", "GET"])
+@bp.route("/user", methods=["POST"])
 @login_required
 def user():
     usr = User.query.filter_by(id=current_user.id).first()
