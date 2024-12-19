@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -47,7 +48,9 @@ const Login = () => {
 
                 <button type="submit">Log In</button>
                 {status && <p>Status: {status}</p>}
+                {location?.state?.message && <p>{location.state.message}</p>}
             </form>
+            <Link to="/">Back to Home</Link>
         </div>
 
     );

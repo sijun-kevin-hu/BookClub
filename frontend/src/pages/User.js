@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const User = () => {
-    const [books, setBooks] = useState([]);
-    const [status, setStatus] = useState('');
+    const [books, setBooks] = useState();
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                setStatus("Fetching")
+                setMessage("Fetching")
                 const response = await
                 fetch('/api/book/', {
                     method: "GET",
@@ -18,14 +18,14 @@ const User = () => {
                     }
                 })
                 const data = await response.json();
-                setStatus(data.status);
+                setMessage(data.message);
                 if (data.status === 'success') {
                     setBooks(data.books);
                 }
                 
             }
             catch(error) {
-                setStatus('Error', error.message);
+                setMessage("Fetching server error");
             }
         };
         fetchBooks();
@@ -42,21 +42,21 @@ const User = () => {
             })
             const data = await response.json();
             if (data.status === "success") {
-                navigate("/login");
+                navigate("/login", {state:{message:"Logged out"}});
             }
         }
         catch(error) {
-            setStatus('Error', error.message);
+            setMessage('Error when logging out');
         }
     }
 
-    if (!books.length) {
+    if (!books) {
         return (
             <div>
                 <h1>Your Books</h1>
                 <Link to="/user/addbook">Add Book</Link>
                 <button onClick={handleClick}>Log Out</button>
-                <p>{status}</p>
+                <p>{message}</p>
                 <p>No books found.</p>
             </div>
         );
@@ -67,7 +67,7 @@ const User = () => {
             <h1>Your Books</h1>
             <Link to="/user/addbook">Add Book</Link>
             <button onClick={handleClick}>Log Out</button>
-            <p>{status}</p>
+            <p>{message}</p>
             <ul>
                 {books.map((book, index) => (
                     <li key={index}>

@@ -40,6 +40,7 @@ def get_books():
         books_list = [{"title": book.title, "author": book.author} for book in books]
         return jsonify({
             "status": "success",
+            "message": "Successfully fetched books",
             "books": books_list
         })
     except Exception as e:
