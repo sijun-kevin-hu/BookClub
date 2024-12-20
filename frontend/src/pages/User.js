@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const User = () => {
+    const [username, setUsername] = useState('');
     const [books, setBooks] = useState();
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
@@ -28,7 +29,29 @@ const User = () => {
                 setMessage("Fetching server error");
             }
         };
+
+        const fetchUser = async () => {
+            try {
+                setMessage("Fetching")
+                const response = await
+                fetch('/auth/user', {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                const data = await response.json();
+                setMessage(data.message);
+                if (data.status === "success") {
+                    setUsername(data.username);
+                }
+            }
+            catch(error) {
+                setMessage("Fetching Server error");
+            }
+        }
         fetchBooks();
+        fetchUser();
     }, []);
 
     const handleClick = async () => {
@@ -54,6 +77,7 @@ const User = () => {
         return (
             <div>
                 <h1>Your Books</h1>
+                <h1>Hi, {username}!</h1>
                 <Link to="/user/addbook">Add Book</Link>
                 <button onClick={handleClick}>Log Out</button>
                 <p>{message}</p>
@@ -64,6 +88,7 @@ const User = () => {
     
     return (
         <div>
+            <h1>Hi, {username}!</h1>
             <h1>Your Books</h1>
             <Link to="/user/addbook">Add Book</Link>
             <button onClick={handleClick}>Log Out</button>

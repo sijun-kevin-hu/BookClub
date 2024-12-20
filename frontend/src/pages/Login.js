@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const Login = () => {
@@ -7,6 +7,28 @@ const Login = () => {
     const [status, setStatus] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const checkUser = async () => {
+            try {
+                const response = await
+                fetch('/auth/user', {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                const data = await response.json();
+                if (data.status === "success") {
+                    navigate("/user")
+                }
+            }
+            catch(error) {
+                
+            }
+        };
+        checkUser();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

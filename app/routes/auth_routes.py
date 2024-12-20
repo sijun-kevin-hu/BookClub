@@ -1,10 +1,26 @@
-from flask import Blueprint, request, url_for, redirect, jsonify
+from flask import Blueprint, request, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from ..models import User
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
+
+@bp.route("/user", methods=["GET"])
+@login_required
+def getUser():
+    try:
+        return jsonify({
+            "status": "success",
+            "message": "User found",
+            "username": current_user.username
+        })
+    except Exception as e:
+        print(f"Error in getUser: {e}")
+        return jsonify({
+            "status": "error",
+            "message": "Server Error"
+        })
 
 @bp.route("/login", methods=["POST"])
 def login():
@@ -70,4 +86,20 @@ def register():
         return jsonify({
             "status": "error",
             "message": "Server error"
+        })
+        
+@bp.route("/all", methods=["GET"])
+def get_users():
+    try:
+        users = User.query.all()
+        users_list = [{"username": user.username, "email": user.email, "password": user.password, "books": user.books} for user in users]
+        return jsonify({
+            "status": "success",
+            "message": "Successfully fetched users",
+            "users": users_list
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": "Server Error"
         })
