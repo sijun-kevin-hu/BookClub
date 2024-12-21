@@ -1,10 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
     const [users, setUsers] = useState();
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
+        // Function checks if admin is logged in
+        const checkAdmin = async () => {
+            try {
+                const response = await
+                fetch('/auth/admin', {
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                const data = await response.json();
+                if (data.status === "error") {
+                    navigate('/login');
+                }
+            }
+            catch(e) {
+
+            }
+        }
+
+        // Function fetches all users
         const fetchUsers = async () => {
             try{
                 const response = await
@@ -25,6 +48,7 @@ const Admin = () => {
             }
         }
         fetchUsers();
+        checkAdmin();
     }, []);
 
     return (

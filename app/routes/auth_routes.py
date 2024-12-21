@@ -103,3 +103,21 @@ def get_users():
             "status": "error",
             "message": "Server Error"
         })
+        
+@bp.route("/admin", methods=["GET"])
+@login_required
+def check_admin():
+    try:
+        admin_user = User.query.filter_by(username="admin").first()
+        if current_user.id != admin_user.id:
+            return jsonify({
+                "status": "error"
+            })
+        else:
+            return jsonify({
+                "status": "success"
+            })
+    except Exception as e:
+        return jsonify({
+            "status": "error"
+        })
