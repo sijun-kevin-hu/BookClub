@@ -1,6 +1,10 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
+from itsdangerous import URLSafeSerializer
+from flask_mail import Mail, Message
+
 from werkzeug.security import generate_password_hash, check_password_hash
+
 from app import db
 from ..models import User
 
@@ -121,3 +125,15 @@ def check_admin():
         return jsonify({
             "status": "error"
         })
+        
+@bp.route("/forgot-password", methods=["POST"])
+def forgot_password():
+    data = request.json
+    email = data['email']
+    
+    # Check if email exists
+    usr = User.query.filter_by(email=email).first()
+    if not usr:
+        return jsonify({'status': 'error'})
+    
+    
