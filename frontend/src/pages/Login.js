@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -60,21 +63,27 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>Email:</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-
-                <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
-                <button type="submit">Log In</button>
-                {status && <p>Status: {status}</p>}
-                {location?.state?.message && <p>{location.state.message}</p>}
-            </form>
-            <Link to="/">Back to Home</Link>
+        <div className='login-page'>
+            <Navbar />
+            <div className='login-container'>
+                <form className='login-form' onSubmit={handleSubmit}>
+                    <div className='input'>
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder='Enter your email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    <div className='input'>
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder='Enter your email' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    <button type="submit" className='submit-btn'>Log In</button>
+                    <div className='links'>
+                        <a href="#">Forgot Password?</a>
+                        <a href="/register">Don't have an account? Register</a>
+                    </div>
+                </form>
+            </div>
+            <Footer />
         </div>
-
     );
 };
 

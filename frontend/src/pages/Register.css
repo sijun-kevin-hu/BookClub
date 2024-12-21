@@ -1,0 +1,34 @@
+.register-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background: white;
+    padding: 3rem;
+    flex-grow: 1;
+}
+
+.register-input {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.register-input input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.register-input input:focus {
+    border: 1px solid #ff690f;
+}

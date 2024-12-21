@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import HeroSection from '../components/HeroSection';
+import './Home.css';
+
 const Home = () => {
     return (
-        <div>
-            <h1>BookClub Home Page</h1>
-            <div class="link">
-                <Link to="/register">Register</Link>
-                <Link to="/login">Login</Link>
+        <div className='container'>
+            <Navbar />
+            <div className='hero'>
+                <HeroSection />
             </div>
+            <Footer />
         </div>
     );
 };

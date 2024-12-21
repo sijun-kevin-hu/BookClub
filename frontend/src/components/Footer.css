@@ -1,0 +1,16 @@
+.footer {
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 1rem;
+}
+
+.footer p {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.legal {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}

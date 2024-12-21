@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import './Register.css';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -37,21 +40,28 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>Username:</label>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-
-                <label>Email:</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-
-                <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
-                <button type="submit">Register</button>
-                {status && <p>Status: {status}</p>}
-            </form>
-            <Link to="/">Back to Home</Link>
+        <div className='register-page'>
+            <Navbar />
+            <div className='register-container'>
+                <form className='register-form' onSubmit={handleSubmit}>
+                    <div className='register-input'>
+                        <label htmlFor='username'>Username:</label>
+                        <input type="text" name="username" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                    </div>
+                    <div className='register-input'>
+                        <label htmlFor='email'>Email:</label>
+                        <input type="email" name="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                    </div>
+                    <label htmlFor='password'>Password:</label>
+                    <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <button type="submit" class="submit-btn">Register</button>
+                    <div className='links'>
+                        <a href='/login'>Have an account? Sign In</a>
+                    </div>
+                    {status && <p>Status: {status}</p>}
+                </form>
+            </div>
+            <Footer />
         </div>
     );
 }
