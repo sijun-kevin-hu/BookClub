@@ -14,6 +14,10 @@
     flex-grow: 1;
 }
 
+.login-form {
+    width: 350px;
+}
+
 .input {
     margin-bottom: 1.5rem;
     display: flex;

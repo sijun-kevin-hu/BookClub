@@ -1,5 +1,7 @@
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
+import './AddBook.css';
 
 const AddBook = () => {
     const [title, setTitle] = useState('');
@@ -40,18 +42,30 @@ const AddBook = () => {
         }
     }
 
+    const handleBackClick = () => {
+        navigate("/user");
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Title:</label>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <div className='add-book-page'>
+            <div className='add-book-container'>
+                <h1>Add a New Book</h1>
+                <button className='back-btn' onClick={handleBackClick}>&larr; Back to Books</button>
+                <form className='add-book-form' onSubmit={handleSubmit}>
+                    <div className='book-input'>
+                        <label htmlFor='title'>Title:</label>
+                        <input type="text" value={title} placeholder="Enter the title" onChange={(e) => setTitle(e.target.value)} />
+                    </div>
+                    <div className='book-input'>
+                        <label htmlFor='author'>Author:</label>
+                        <input type="text" value={author} placeholder="Enter the author" onChange={(e) => setAuthor(e.target.value)} />
+                    </div>
 
-            <label>Author:</label>
-            <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
-
-            <button type="submit">Submit</button>
-            {status && <p>Status: {status}</p>}
-            {message && <p>Message: {message}</p>}
-        </form>
+                    <button type="submit" className='submit-btn'>Submit</button>
+                </form>
+            </div>
+            <Footer />
+        </div>
     );
 }
 

@@ -1,0 +1,97 @@
+button {
+    cursor: pointer;
+}
+
+#add-book {
+    text-decoration: none;
+    color: inherit;
+}
+
+.user-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.user-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.add-book-btn {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+}
+
+.add-book-btn:hover {
+    background-color: #0056b3;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.user-books ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.book-item {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.book-item h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.book-item p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.user-books p {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #888;
+}

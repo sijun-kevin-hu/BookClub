@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
+import './User.css';
 
 const User = () => {
     const [username, setUsername] = useState('');
-    const [books, setBooks] = useState();
+    const [books, setBooks] = useState([]);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
@@ -72,35 +74,34 @@ const User = () => {
             setMessage('Error when logging out');
         }
     }
-
-    if (!books) {
-        return (
-            <div>
-                <h1>Your Books</h1>
-                <h1>Hi, {username}!</h1>
-                <Link to="/user/addbook">Add Book</Link>
-                <button onClick={handleClick}>Log Out</button>
-                <p>{message}</p>
-                <p>No books found.</p>
-            </div>
-        );
-    }
     
     return (
-        <div>
-            <h1>Hi, {username}!</h1>
-            <h1>Your Books</h1>
-            <Link to="/user/addbook">Add Book</Link>
-            <button onClick={handleClick}>Log Out</button>
-            <p>{message}</p>
-            <ul>
-                {books.map((book, index) => (
-                    <li key={index}>
-                        <h2>{book.title}</h2>
-                        <p>Author: {book.author}</p>
-                    </li>
-                ))}
-            </ul>
+        <div className='user-page'>
+            <div className='user-container'>
+                <div className='user-header'>
+                    <h1>Welcome, {username}!</h1>
+                    <p>{message}</p>
+                </div>
+                <div className='user-actions'>
+                    <button className='user-btn add-book-btn'><Link to='/user/addbook' id="add-book">Add Book</Link></button>
+                    <button onClick={handleClick} className='user-btn logout-btn'>Log Out</button>
+                </div>
+                <div className='user-books'>
+                    {books.length === 0 ? (
+                        <p>No books found. Start by adding your favorite books!</p>
+                    ) : (
+                        <ul>
+                            {books.map((book, index) => (
+                                <li key={index} className='book-item'>
+                                    <h2>{book.title}</h2>
+                                    <p>Author: {book.author}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            </div>
+            <Footer />
         </div>
     );
 }
