@@ -21,8 +21,8 @@ def create_app():
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 587
     app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USERNAME'] = 'email@example.com'
-    app.config['MAIL_PASSWORD'] = 'email@example.com'
+    app.config['MAIL_USERNAME'] = '22kevinhu@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'Jinzhu@8'
     app.config['MAIL_DEFAULT_SENDER'] = 'email@example.com'
     
     
