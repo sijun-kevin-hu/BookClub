@@ -1,9 +1,6 @@
 from flask import Blueprint, request, jsonify
 <<<<<<< HEAD
-<<<<<<< HEAD
 from itsdangerous import URLSafeTimedSerializer
-=======
->>>>>>> parent of 3a55a6c (implement password reset functionality with email notifications)
 =======
 >>>>>>> parent of 3a55a6c (implement password reset functionality with email notifications)
 from flask_login import login_user, logout_user, current_user, login_required
