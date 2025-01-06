@@ -10,7 +10,6 @@
 
 # production
 /build
-instance/users.sqlite3
 
 # misc
 .DS_Store
