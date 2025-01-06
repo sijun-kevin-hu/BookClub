@@ -1,12 +1,14 @@
 from flask import Blueprint, request, jsonify
+<<<<<<< HEAD
 from itsdangerous import URLSafeTimedSerializer
+=======
+>>>>>>> parent of 3a55a6c (implement password reset functionality with email notifications)
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from ..models import User
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
-serializer = URLSafeTimedSerializer("hello")
 
 @bp.route("/user", methods=["GET"])
 @login_required

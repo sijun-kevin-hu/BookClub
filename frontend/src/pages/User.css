@@ -21,9 +21,12 @@ button {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 <<<<<<< HEAD
+<<<<<<< HEAD
     flex-grow: 1;
 =======
 >>>>>>> d33b8e2 (updated styling on all pages)
+=======
+>>>>>>> parent of 3a55a6c (implement password reset functionality with email notifications)
 }
 
 .user-header {
