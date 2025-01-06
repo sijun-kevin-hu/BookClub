@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import User from './pages/User';
 import AddBook from './pages/AddBook';
 import Admin from './pages/Admin';
+import ForgetPassword from './pages/ForgotPassword';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/user/addbook" element={<AddBook />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/forgot-password" element={<ForgetPassword />} />
       </Routes>
     </Router>
   );
