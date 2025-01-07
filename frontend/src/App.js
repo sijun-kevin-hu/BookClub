@@ -6,6 +6,7 @@ import User from './pages/User';
 import AddBook from './pages/AddBook';
 import Admin from './pages/Admin';
 import ForgetPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/user/addbook" element={<AddBook />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/forgot-password" element={<ForgetPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
     </Router>
   );

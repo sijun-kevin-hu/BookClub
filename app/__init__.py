@@ -19,11 +19,11 @@ def create_app():
     login_manager.login_view = 'auth.login'
     
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_PORT'] = 465
     app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USERNAME'] = '22kevinhu@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'Jinzhu@8'
-    app.config['MAIL_DEFAULT_SENDER'] = 'email@example.com'
+    app.config['MAIL_USE_SSL'] = True
+    app.config['MAIL_USERNAME'] = ''
+    app.config['MAIL_PASSWORD'] = ''
     
     
     from .models import User

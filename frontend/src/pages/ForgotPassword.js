@@ -39,7 +39,7 @@ const ForgetPassword = () => {
                     </div>
                 </form>
                 {message && <p>{message}</p>}
-                <p>After submitting your email, a link will be sent to confirm reset password</p>
+                <p>After submitting your email, a link will be sent to confirm reset password. FUNCTIONALITY DOESN'T WORK YET</p>
             </div>
             <Footer />
         </div>
